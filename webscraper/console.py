@@ -1,4 +1,4 @@
-from scraper import AnnouncementScraper
+from scraper import Scraper
 
 if __name__ == "__main__":
   import sys
@@ -6,5 +6,5 @@ if __name__ == "__main__":
     print('usage: python console.py [mode] [filename]')
     sys.exit(1)
   else:
-    ascraper = AnnouncementScraper(sys.argv[1], sys.argv[2])
-    ascraper.run()
+    scr = Scraper(sys.argv[1], sys.argv[2])
+    scr.run()

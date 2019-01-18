@@ -6,7 +6,7 @@ from secrets import (ADMIN_PASSWORD, ADMIN_USER, TARGET_LOGIN, TARGET_NEW_ANN,
 from selenium import webdriver
 
 
-class AnnouncementScraper(object):
+class Scraper(object):
   def __init__(self, mode, csv_file):
     self.csv_file = csv_file
     self.mode = mode
