@@ -12,7 +12,7 @@ Where:
 1. `mode` can be `'ann'`, `'wbs'`, or `'tnm'`
 2. `filename` is the relative path of the csv file containing the info you want on the website.
 
-You also need to define some contants in a secrets.py file
+You also need to define some constants in a secrets.py file
 ``` python
 # for admin login, contact me
 ADMIN_USER = ''
