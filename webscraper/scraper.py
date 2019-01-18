@@ -29,10 +29,27 @@ class Scraper(object):
     submit.click()
 
   def add_new_wbs(self, row):
-    pass
+    date = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[1]')
+    location = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[2]')
+    topic = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[3]')
+    doc_link = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[4]')
+    submit = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/button[2]')
+    date.send_keys(row['date'])
+    location.send_keys(row['location'])
+    topic.send_keys(row['topic'])
+    doc_link.send_keys(row['link'])
+    submit.click()
+
 
   def add_new_tnm(self, row):
-    pass
+    date = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/input[1]')
+    topic = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/input[2]')
+    doc_link = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/input[3]')
+    submit = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/button[2]')
+    date.send_keys(row['date'])
+    topic.send_keys(row['topic'])
+    doc_link.send_keys(row['link'])
+    submit.click()
 
   def login_to_site(self):
     self.browser.get(TARGET_LOGIN)
@@ -61,10 +78,10 @@ class Scraper(object):
         TARGET = TARGET_NEW_ANN
         XPATH = '/html/body/app-root/app-admin-homepage/div[2]/div/div/table/tbody/tr/td/button'
         add_new_item = self.add_new_ann
-    elif seld.mode == 'wbs':
+    elif self.mode == 'wbs':
         TARGET = TARGET_NEW_WBS
         XPATH = '/html/body/app-root/app-admin-homepage/div[3]/div/div/table/tbody/tr/td/button'
-        add_new_item =self.add_new_wbs
+        add_new_item = self.add_new_wbs
     elif self.mode == 'tnm':
         TARGET = TARGET_NEW_TNM
         XPATH = '/html/body/app-root/app-admin-homepage/div[4]/div/div/table/tbody/tr/td/button'
