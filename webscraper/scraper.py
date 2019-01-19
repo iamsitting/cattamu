@@ -16,39 +16,13 @@ class Scraper(object):
     options.add_argument('window-size=1200x600')
     self.browser = webdriver.Chrome(chrome_options=options)
 
-  def add_new_ann(self, row):
-    title = self.browser.find_element_by_xpath('/html/body/app-root/app-new-announcement/div/div/div/div[2]/form/input[1]')
-    subtitle = self.browser.find_element_by_xpath('/html/body/app-root/app-new-announcement/div/div/div/div[2]/form/input[2]')
-    doc_link = self.browser.find_element_by_xpath('/html/body/app-root/app-new-announcement/div/div/div/div[2]/form/input[3]')
-    pic_link = self.browser.find_element_by_xpath('/html/body/app-root/app-new-announcement/div/div/div/div[2]/form/input[4]')
-    submit = self.browser.find_element_by_xpath('/html/body/app-root/app-new-announcement/div/div/div/div[2]/form/button[2]')
-    title.send_keys(row['title'])
-    subtitle.send_keys(row['subtitle'])
-    doc_link.send_keys(row['link'])
-    pic_link.send_keys(row['pic'])
-    submit.click()
-
-  def add_new_wbs(self, row):
-    date = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[1]')
-    location = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[2]')
-    topic = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[3]')
-    doc_link = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/input[4]')
-    submit = self.browser.find_element_by_xpath('/html/body/app-root/app-new-wbs/div/div/div/div[2]/form/button[2]')
-    date.send_keys(row['date'])
-    location.send_keys(row['location'])
-    topic.send_keys(row['topic'])
-    doc_link.send_keys(row['link'])
-    submit.click()
-
-
-  def add_new_tnm(self, row):
-    date = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/input[1]')
-    topic = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/input[2]')
-    doc_link = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/input[3]')
-    submit = self.browser.find_element_by_xpath('/html/body/app-root/app-new-tnm/div/div/div/div[2]/form/button[2]')
-    date.send_keys(row['date'])
-    topic.send_keys(row['topic'])
-    doc_link.send_keys(row['link'])
+  def add_new_item(self, row):
+    form = self.browser.find_element_by_tag_name('form')
+    inputs = form.find_elements_by_tag_name('input')
+    buttons = form.find_elements_by_tag_name('button')
+    submit = next((b for b in buttons if 'submit' in b.text.lower()))
+    for el in inputs:
+      el.send_keys(row.popitem()[1])
     submit.click()
 
   def login_to_site(self):
@@ -81,19 +55,16 @@ class Scraper(object):
     if self.mode == 'ann':
         TARGET = TARGET_NEW_ANN
         search_for = 'announcement'
-        add_new_item = self.add_new_ann
     elif self.mode == 'wbs':
         TARGET = TARGET_NEW_WBS
         search_for = 'wednesday'
-        add_new_item = self.add_new_wbs
     elif self.mode == 'tnm':
         TARGET = TARGET_NEW_TNM
         search_for = 'thursday'
-        add_new_item = self.add_new_tnm
 
     self.delete_entires(XPATH, search_for)
     with open(self.csv_file, 'rU') as f:
       reader = csv.DictReader(f)
-      for row in reader:
+      for row in reader:  # row is an OrderedDict in python 3.6
         self.browser.get(TARGET)
-        add_new_item(row)
+        self.add_new_item(row)
