@@ -53,21 +53,25 @@ class Scraper(object):
 
   def login_to_site(self):
     self.browser.get(TARGET_LOGIN)
-    uname = self.browser.find_element_by_xpath('//*[@id="username"]')
-    pw = self.browser.find_element_by_xpath('//*[@id="password"]')
-    submit = self.browser.find_element_by_xpath('/html/body/app-root/app-admin-login/div/div/div/div/div/div/form/button')
+    form = self.browser.find_element_by_tag_name('form')
+    uname = form.find_element_by_id('username')
+    pw = form.find_element_by_id('password')
+    submit = form.find_element_by_tag_name('button')
     uname.send_keys(ADMIN_USER)
     pw.send_keys(ADMIN_PASSWORD)
     submit.click()
 
-  def delete_entires(self, button_xpath):
+  def delete_entires(self, search_for)
     while True:
       try:
         time.sleep(2)
-        delete_buttons = self.browser.find_elements_by_xpath(button_xpath)
+        headers = self.browser.find_elements_by_tag_name('h1')
+        target_header = next((h for h in headers if search_for in h.text.lower()))
+        table = target_header.find_element_by_xpath('//following-sibling::table')
+        delete_buttons = table.find_elements_by_tag_name('button')
         delete_buttons[0].click()
       except Exception:
-        print('delete buttons were not found')
+        print('No buttons available.')
         break
     time.sleep(0.5)
 
@@ -76,17 +80,18 @@ class Scraper(object):
     self.login_to_site()
     if self.mode == 'ann':
         TARGET = TARGET_NEW_ANN
-        XPATH = '/html/body/app-root/app-admin-homepage/div[2]/div/div/table/tbody/tr/td/button'
+        search_for = 'announcement'
         add_new_item = self.add_new_ann
     elif self.mode == 'wbs':
         TARGET = TARGET_NEW_WBS
-        XPATH = '/html/body/app-root/app-admin-homepage/div[3]/div/div/table/tbody/tr/td/button'
+        search_for = 'wednesday'
         add_new_item = self.add_new_wbs
     elif self.mode == 'tnm':
         TARGET = TARGET_NEW_TNM
-        XPATH = '/html/body/app-root/app-admin-homepage/div[4]/div/div/table/tbody/tr/td/button'
+        search_for = 'thursday'
         add_new_item = self.add_new_tnm
-    self.delete_entires(XPATH)
+
+    self.delete_entires(XPATH, search_for)
     with open(self.csv_file, 'rU') as f:
       reader = csv.DictReader(f)
       for row in reader:
