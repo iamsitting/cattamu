@@ -7,21 +7,25 @@ from selenium import webdriver
 
 
 class Scraper(object):
+  filename = ''
+  mode = ''
+  target = ''
 
-  def __init__(self, mode, filename):
-    self.filename = filename
-    self.mode = filename.split('.csv')[0]  # does not handle file path
-    if self.mode == 'announcement':
+  def __init__(self, filename):
+    if '.csv' in filename:
+      self.filename = filename
+      self.mode = filename.split('.csv')[0].split('/')[-1]
+    else:
+      raise ValueError('bad file name: ' + filename)
+    print(self.mode)
+    if self.mode == 'announcements':
       self.target = TARGET_NEW_ANN
     elif self.mode == 'wednesday':
       self.target = TARGET_NEW_WBS
-    elif self.mode = 'thursday':
+    elif self.mode == 'thursday':
       self.target = TARGET_NEW_TNM
     else:
       raise ValueError('bad file name')
-
-
-    if self.mode in ['announcement', 'wednesday', 'thursday']:
 
   def setUp(self):
     options = webdriver.ChromeOptions()
@@ -31,16 +35,16 @@ class Scraper(object):
   def find_tag_child_by_text(self, parent, tag, text):
     try:
       children = parent.find_elements_by_tag_name(tag)
-      return next(c for c in children if 'text' in c.text.lower())
-    except Exception:  # too general
-      raise ValueError('Something went wrong!')
+      return next(c for c in children if text in c.text.lower())
+    except Exception as e:  # too general
+      raise print('Something went wrong: ' + e)
 
   def add_new_item(self, row):
     form = self.browser.find_element_by_tag_name('form')
     inputs = form.find_elements_by_tag_name('input')
     submit = self.find_tag_child_by_text(form, 'button', 'submit')
     for el in inputs:
-      el.send_keys(row.popitem()[1])
+      el.send_keys(row.popitem(last=False)[1])
     submit.click()
 
   def login_to_site(self):
@@ -53,7 +57,7 @@ class Scraper(object):
     pw.send_keys(ADMIN_PASSWORD)
     submit.click()
 
-  def delete_entires(self, search_for)
+  def delete_items(self, search_for):
     while True:
       try:
         time.sleep(2)
@@ -69,9 +73,9 @@ class Scraper(object):
   def run(self):
     self.setUp()
     self.login_to_site()
-    self.delete_entires(self.mode)
+    self.delete_items(self.mode)
     with open(self.filename, 'rU') as f:
       reader = csv.DictReader(f)
       for row in reader:  # row is an OrderedDict in python 3.6
-        self.browser.get(TARGET)
+        self.browser.get(self.target)
         self.add_new_item(row)

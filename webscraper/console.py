@@ -2,7 +2,7 @@ from scraper import Scraper
 
 if __name__ == "__main__":
   import sys
-  if len(sys.argv) < 1:
+  if len(sys.argv) < 2:
     print('usage: python console.py [filename]')
     sys.exit(1)
   else:
