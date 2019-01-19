@@ -8,9 +8,20 @@ from selenium import webdriver
 
 class Scraper(object):
 
-  def __init__(self, mode, csv_file):
-    self.csv_file = csv_file
-    self.mode = mode
+  def __init__(self, mode, filename):
+    self.filename = filename
+    self.mode = filename.split('.csv')[0]  # does not handle file path
+    if self.mode == 'announcement':
+      self.target = TARGET_NEW_ANN
+    elif self.mode == 'wednesday':
+      self.target = TARGET_NEW_WBS
+    elif self.mode = 'thursday':
+      self.target = TARGET_NEW_TNM
+    else:
+      raise ValueError('bad file name')
+
+
+    if self.mode in ['announcement', 'wednesday', 'thursday']:
 
   def setUp(self):
     options = webdriver.ChromeOptions()
@@ -22,7 +33,7 @@ class Scraper(object):
       children = parent.find_elements_by_tag_name(tag)
       return next(c for c in children if 'text' in c.text.lower())
     except Exception:  # too general
-      raise Exception('Something went wrong!')
+      raise ValueError('Something went wrong!')
 
   def add_new_item(self, row):
     form = self.browser.find_element_by_tag_name('form')
@@ -58,18 +69,8 @@ class Scraper(object):
   def run(self):
     self.setUp()
     self.login_to_site()
-    if self.mode == 'ann':
-        TARGET = TARGET_NEW_ANN
-        search_for = 'announcement'
-    elif self.mode == 'wbs':
-        TARGET = TARGET_NEW_WBS
-        search_for = 'wednesday'
-    elif self.mode == 'tnm':
-        TARGET = TARGET_NEW_TNM
-        search_for = 'thursday'
-
-    self.delete_entires(search_for)
-    with open(self.csv_file, 'rU') as f:
+    self.delete_entires(self.mode)
+    with open(self.filename, 'rU') as f:
       reader = csv.DictReader(f)
       for row in reader:  # row is an OrderedDict in python 3.6
         self.browser.get(TARGET)
