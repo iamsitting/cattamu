@@ -7,6 +7,7 @@ from selenium import webdriver
 
 
 class Scraper(object):
+
   def __init__(self, mode, csv_file):
     self.csv_file = csv_file
     self.mode = mode
@@ -16,11 +17,17 @@ class Scraper(object):
     options.add_argument('window-size=1200x600')
     self.browser = webdriver.Chrome(chrome_options=options)
 
+  def find_tag_child_by_text(self, parent, tag, text):
+    try:
+      children = parent.find_elements_by_tag_name(tag)
+      return next(c for c in children if 'text' in c.text.lower())
+    except Exception:  # too general
+      raise Exception('Something went wrong!')
+
   def add_new_item(self, row):
     form = self.browser.find_element_by_tag_name('form')
     inputs = form.find_elements_by_tag_name('input')
-    buttons = form.find_elements_by_tag_name('button')
-    submit = next((b for b in buttons if 'submit' in b.text.lower()))
+    submit = self.find_tag_child_by_text(form, 'button', 'submit')
     for el in inputs:
       el.send_keys(row.popitem()[1])
     submit.click()
@@ -39,9 +46,8 @@ class Scraper(object):
     while True:
       try:
         time.sleep(2)
-        headers = self.browser.find_elements_by_tag_name('h1')
-        target_header = next((h for h in headers if search_for in h.text.lower()))
-        table = target_header.find_element_by_xpath('//following-sibling::table')
+        header = self.find_tag_child_by_text(self.browser, 'h1', search_for)
+        table = header.find_element_by_xpath('//following-sibling::table')
         delete_buttons = table.find_elements_by_tag_name('button')
         delete_buttons[0].click()
       except Exception:
@@ -62,7 +68,7 @@ class Scraper(object):
         TARGET = TARGET_NEW_TNM
         search_for = 'thursday'
 
-    self.delete_entires(XPATH, search_for)
+    self.delete_entires(search_for)
     with open(self.csv_file, 'rU') as f:
       reader = csv.DictReader(f)
       for row in reader:  # row is an OrderedDict in python 3.6
