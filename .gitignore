@@ -1,4 +1,7 @@
 *secrets.py
 __pycache__
 selenv/
-
+.DS_Store
+/static/assets/
+*/migrations/*
+db.sqlite3

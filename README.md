@@ -29,3 +29,5 @@ TARGET_NEW_WBS = ''
 This application uses selenium and the Chrome webdriver. This means that results may vary from machine to machine.
 This application should be maintained as the website's frontend is modified. Hopefully this application does not remain for too long...
 
+## Website
+The CATAMU website with django backend and angular frontend.
