@@ -2,6 +2,11 @@
 __pycache__
 selenv/
 .DS_Store
-/static/assets/
-*/migrations/*
-db.sqlite3
+website/backend/catamu/static/
+migrations/
+*.sqlite3
+*.sql
+node_modules/
+package-lock.json
+website/frontend/src/assets/
+

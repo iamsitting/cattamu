@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div class="page-header" style="background: white;">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-4 col-sm-6 ml-auto mr-auto">
+                  <div class="card card-register" style="padding: 15px 30px 30px 30px; box-shadow: 0px 0px 0px 0px;">
+                      <h3 class="card-title" style="color: #500000; font-weight: 700;">Welcome</h3>
+                      <form class="register-form">
+                          <label style="color: #500000; font-weight: 600;">Username</label>
+                          <input type="username" class="form-control" style="border: .5px solid black !important;" (keyup)="getUsername($event)" id="username">
+
+                          <label style="color: #500000; font-weight: 600;">Password</label>
+                          <input type="password" class="form-control" style="border: .5px solid black !important;" (keyup)="getPassword($event)" id="password">
+                          <button class="btn btn-block btn-round" style="background-color: #fbc658; border: 0px;" (click)="login()"><span style="color: #500000;">Login</span></button>
+                      </form>
+                      <div *ngIf="errorMessage == 'false'" class="text-center" style="margin-top: 10px; font-weight: 600;">
+                         <p style="color: red;">Invalid Username or Password</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+@media (max-width: 988px) {
+    div.coloured-cards {
+        position: relative;
+        margin: -80px;
+    }
+}
+@media (max-width: 800px) {
+    div.coloured-cards {
+        position: relative;
+        margin: -60px;
+    }
+}
+@media (max-width: 600px) {
+    div.coloured-cards {
+        position: relative;
+        margin: -40px;
+    }
+}
+@media (max-width: 400px) {
+    div.coloured-cards {
+        position: relative;
+        margin:  10px;
+    }
+}
+
+hr{
+    border: .5px solid #fbdb93;
+ }

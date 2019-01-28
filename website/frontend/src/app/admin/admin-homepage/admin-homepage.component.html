@@ -1,0 +1,103 @@
+<div class="page-header page-header-small" style="background-image: url('./assets/img/admin.jpg');">
+    <div class="filter filter-neutral"></div>
+    <div class="content-center">
+        <div class="container">
+            <h1>Welcome back, administrator</h1>
+            <button class="btn btn-round logout" (click)="logout()"><span style="color: #500000;">Logout</span></button>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container tim-container, text-center">
+        <h1>Announcements</h1>
+        <div class="table-responsive">
+            <table class="table" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="border-top: 0px;">Title</th>
+                        <th class="text-center" style="border-top: 0px;">Subtitle</th>
+                        <th class="text-center" style="border-top: 0px;">link</th>
+                        <th class="text-center" style="border-top: 0px;">Picture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let announcement of announcements">
+                        <td class="text-center"><div style="word-wrap: break-word">{{announcement.title}}</div></td>
+                        <td class="text-center"><div style="word-wrap: break-word">{{announcement.subtitle}}</div></td>
+                        <td class="text-center"><div style="word-wrap: break-word"><a [attr.href]="announcement.link" target="_blank">Click here for the link</a></div></td>
+                        <td class="text-center"><div style="word-wrap: break-word"><a [attr.href]="announcement.picLink" target="_blank">Click here for the link</a></div></td>
+                        <td><button class="btn btn-danger" (click)="deleteAnnouncement(announcement)">DELETE</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container text-center">
+                <button class="btn btn-success" [routerLink]="['/admin/new-announcement']">Add a new announcement</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section section-gray">
+    <div class="container tim-container, text-center">
+        <h1>Wednesday Bible Studies</h1>
+        <div class="table-responsive">
+            <table class="table" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                    <th class="text-center" style="border-top: 0px;">Date</th>
+                    <th class="text-center" style="border-top: 0px;">Location</th>
+                    <th class="text-center" style="border-top: 0px;">Topic</th>
+                    <th class="text-center" style="border-top: 0px;">Download Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let wbsRecord of wbsTable">
+                        <td class="text-center"><div style="word-wrap: break-word">{{wbsRecord.date}}</div></td>
+                        <td class="text-center"><div style="word-wrap: break-word">{{wbsRecord.location}}</div></td>
+                        <td class="text-center"><div style="word-wrap: break-word">{{wbsRecord.topic}}</div></td>
+                        <td *ngIf="wbsRecord.download !== 'N/A'; else noDownload" class="text-center"><div style="word-wrap: break-word"><a [attr.href]="wbsRecord.download" target="blank">Click here for the link</a></div></td>
+                        <ng-template #noDownload>
+                            <td class="text-center"><div style="word-wrap: break-word">N/A</div></td>
+                        </ng-template>
+                        <td><button class="btn btn-danger" (click)="deleteWbs(wbsRecord)">DELETE</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container text-center">
+                <button class="btn btn-success" [routerLink]="['/admin/new-wbs']">Add a new week</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container tim-container, text-center">
+        <h1>Thursday Night Ministry</h1>
+        <div class="table-responsive">
+            <table class="table" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                    <th class="text-center" style="border-top: 0px;">Date</th>
+                    <th class="text-center" style="border-top: 0px;">Topic</th>
+                    <th class="text-center" style="border-top: 0px;">Download Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tnmRecord of tnmTable">
+                        <td class="text-center"><div style="word-wrap: break-word">{{tnmRecord.date}}</div></td>
+                        <td class="text-center"><div style="word-wrap: break-word">{{tnmRecord.topic}}</div></td>
+                        <td *ngIf="tnmRecord.download !== 'N/A'; else noDownload" class="text-center"><div style="word-wrap: break-word"><a [attr.href]="tnmRecord.download" target="blank">Click here for the link</a></div></td>
+                        <ng-template #noDownload>
+                            <td class="text-center"><div style="word-wrap: break-word">N/A</div></td>
+                        </ng-template>
+                        <td><button class="btn btn-danger" (click)="deleteTnm(tnmRecord)">DELETE</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container text-center">
+                <button class="btn btn-success" [routerLink]="['/admin/new-tnm']">Add a new week</button>
+            </div>
+        </div>
+    </div>
+</div>

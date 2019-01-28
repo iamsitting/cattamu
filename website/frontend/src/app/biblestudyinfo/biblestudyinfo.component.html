@@ -1,0 +1,45 @@
+<div class="page-header page-header-small" style="background-image: url('./assets/img/wheat.jpg');">
+  <div class="filter filter-dark"></div>
+  <div class="content-center">
+    <div class="container">
+      <h1>
+        <br /> Thursday Ministry Series</h1>
+      <h3>6:30pm @ PYSCH 106</h3>
+    </div>
+  </div>
+</div>
+
+<div class="section section-gray">
+  <div class="container tim-container">
+    <div class="table-responsive">
+      <table class="table" style="table-layout: fixed;">
+        <thead>
+          <tr>
+            <th class="text-center" style="border-top: 0px;">Date</th>
+            <th class="text-center" style="border-top: 0px;">Topic</th>
+            <th class="text-center" style="border-top: 0px;">Download Outline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tnmRecord of tnmTable">
+            <td class="text-center">{{tnmRecord.date}}</td>
+            <td class="text-center">{{tnmRecord.topic}}</td>
+            <td *ngIf="tnmRecord.download !== 'N/A'; else noDownload" class="text-center">
+              <a [attr.href]="tnmRecord.download" target="blank">
+                <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-icon">
+                  <i class="fa fa-download"></i>
+                </button>
+              </a>
+            </td>
+            <ng-template #noDownload>
+                <td><div class="text-center" style="word-wrap: break-word">N/A</div></td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>

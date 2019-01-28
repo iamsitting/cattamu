@@ -1,0 +1,264 @@
+<!--     *********    RECENT EVENTS     *********      -->
+<div class="header-3">
+  <div class="page-carousel">
+    <div *ngIf="announcements === null || httpError === true; else announcementPopulate" class="page-header" style="background-image: url('https://lh3.googleusercontent.com/w5YhquAISp0LegweTMYu1nTJ1EjJhb2FobrmVqcGqXxsVAN7T-gI1XUjO6Et5FTH5RImaqRrhPIaC395KXC41nFBlejhSXhg4Rhdk41jXkrR2jSPQKIzQTVkV41Z74dw6sQKbzlrjw=w2066-h1406-no');">
+      <div class="content-center">
+        <h1 class="presentation-title2">Howdy!</h1>
+      </div>
+    </div>
+    <ng-template #announcementPopulate>
+      <ngb-carousel>
+        <div *ngFor="let announcement of announcements">
+          <ng-template ngbSlide>
+            <div *ngIf="announcement.picLink != 'N/A'; else noPicLink" class="page-header" [style.background-image]="'url(' + announcement.picLink + ')'">
+              <div class="content-center">
+                <h1 *ngIf="announcement.title != 'N/A'" class="presentation-title2">{{announcement.title}}</h1>
+                <h5 *ngIf="announcement.subtitle != 'N/A'" class="presentation-subtitle2" style="font-size: 30px;">{{announcement.subtitle}}</h5>
+                <a [attr.href]="announcement.link" target="_blank">
+                  <button *ngIf="announcement.link != 'N/A'" type="button" class="btn btn-warning btn-round"><span style="color:maroon; font-weight: 600;">click here</span></button>
+                </a>
+              </div>
+            </div>
+
+            <ng-template #noPicLink>
+              <div class="page-header" style="background-image: url('https://lh3.googleusercontent.com/w5YhquAISp0LegweTMYu1nTJ1EjJhb2FobrmVqcGqXxsVAN7T-gI1XUjO6Et5FTH5RImaqRrhPIaC395KXC41nFBlejhSXhg4Rhdk41jXkrR2jSPQKIzQTVkV41Z74dw6sQKbzlrjw=w2066-h1406-no');">
+                <div class="content-center">
+                  <h1 *ngIf="announcement.title != 'N/A'" class="presentation-title2">{{announcement.title}}</h1>
+                  <h5 *ngIf="announcement.subtitle != 'N/A'" class="presentation-subtitle2">{{announcement.subtitle}}</h5>
+                  <a [attr.href]="announcement.link" target="_blank">
+                    <button *ngIf="announcement.link != 'N/A'" type="button" class="btn btn-warning btn-round"><span style="color:maroon; font-weight: 600;">click here</span></button>
+                  </a>
+                </div>
+              </div>
+            </ng-template>
+          </ng-template>
+        </div>
+      </ngb-carousel>
+    </ng-template>
+  </div>
+</div>
+
+<!--     *********    ABOUT US     *********      -->
+
+<div class="section section-buttons" id="About">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tim-title" style="text-align: center">
+          <h1>Who We Are</h1>
+        </div>
+      </div>
+      <div class="col-md-6" style="margin-top:50px">
+
+        <h3>We love the Lord Jesus Christ and like to pursue, run after Him together! Throughout the week, we have Bible studies
+          and fellowship in small groups on campus and in homes of Christian families in the community.</h3>
+        <br>
+      </div>
+      <div class="col-md-6 ml-auto mr-right text-center" style="margin-top: -35px">
+        <div class="tim-title">
+          <h1 style="font-size: 25spx; text-align:center;">
+            <br>
+            <span style="color: maroon; font-weight: bold; font-size: 35px; font-style: inherit ">
+              RUN
+              <br> THE RACE
+            </span>
+            <br>
+
+            <span style="font-size: 20px; text-align:center;">HEBREWS 12:1</span>
+            <br/>
+            <div>
+              <br>
+              <a style="color:maroon; margin-top: -75px" class="nav-link" [routerLink]="['/about']" class="btn btn-warning btn-round card-link">
+                Learn More
+              </a>
+            </div>
+          </h1>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="col-md-10 ml-auto mr-auto">
+  <hr/>
+</div>
+
+<br>
+
+<!--     *********    WHAT WE DO     *********      -->
+
+<div class="title text-center" id="moreabout">
+  <h1>What We Do</h1>
+</div>
+<div class="Contact">
+  <div class="row" style="margin: 3px" id="whatwedo">
+
+    <div class="col-md-4 ml-auto mr-auto text-center">
+      <div class="card" data-background="image" style="background-image: url('assets/img/IMG_0695.jpg'); ">
+        <div class="card-body">
+          <h3 class="card-category" style="font-weight: bold;">On Campus</h3>
+          <h4 style="color:white;  margin: 30px;" class="description">Connect with other students On Campus to read the Word of God </h4>
+
+
+
+
+          <button style="color:maroon;" class="nav-link" [routerLink]="['/wednesday-bs']" type="button" class="btn btn-warning btn-round">Bible Study</button>
+          <hr />
+          <button style="color:maroon;" class="nav-link" [routerLink]="['/biblestudyinfo']" type="button" class="btn btn-warning btn-round">Ministry Series</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card" data-background="image" style="background-image: url('./assets/img/IMG_0869.jpg');  ">
+        <div class="card-body">
+          <h3 class="card-category" style="font-weight: bold">Off Campus</h3>
+          <h4 style="color:white; margin: 30px;">Fellowship in homes with families around the community </h4>
+
+
+          <button style="color:maroon;" class="nav-link" [routerLink]="['/events']" type="button" class="btn btn-warning btn-round">Home Groups</button>
+          <hr />
+          <button style="color:maroon;" class="nav-link" [routerLink]="['/events']" type="button" class="btn btn-warning btn-round">Sunday Worship</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card" data-background="image" style="background-image: url('./assets/img/CC.jpeg'); ">
+        <div class="card-body">
+          <h3 class="card-category" style="font-weight: bold;">Yearly Events</h3>
+          <h4 style="color:white;  margin:30px;">Meet other Christian students at other college campuses </h4>
+
+          <button style="color:maroon;" type="button" class="btn btn-warning btn-round">
+            <a href="http://www.college-conference.org/" style="color: maroon; font-weight: bold;" target="blank">
+              <h6 style="color: maroon">College Conference</h6>
+            </a>
+          </button>
+          <hr />
+          <button style="color:maroon;" class="nav-link" [routerLink]="['/events']" type="button" class="btn btn-warning btn-round">Student Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<br>
+<br>
+
+<!--     *********    TESTIMONIALS      *********      -->
+<div class="cd-section section-white" id="testimonials">
+  <div class="testimonials-1 section-image" style="background-image: url('./assets/img/boat.jpg'); background-attachment: fixed;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 ml-auto mr-auto text-center">
+          <h1 class="title">Testimonials</h1>
+          <h2 class="description">Hear from our own students about their experience with Christians at TAMU
+          </h2>
+        </div>
+      </div>
+      <div class="space-top"></div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card card-testimonial">
+            <div class="card-icon">
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </div>
+            <div class="card-body">
+              <p class="card-description" style="color: gray">
+                I have never read so much of the Bible as I have these past years. Not only do I know Christ objectively but Christians at
+                TAMU has helped me experience Christ subjectively in every part of my life. "Even now Christ will be magnified in my body" - Phil 1:20
+              </p>
+              <div class="card-footer">
+                <h2 class="card-title" style="font-size: 20px">Andrew Huang</h2>
+                <h6 class="card-category"></h6>
+                <div class="card-avatar" style="vertical-align: bottom">
+                    <img class="img" src="./assets/img/profilepic2.jpg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-testimonial">
+            <div class="card-icon">
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </div>
+            <div class="card-body">
+              <p class="card-description" style="color: gray">
+                "It was my freshman year when I saw the big yellow sign in front of the table at the MSC which said, “Christians @ TAMU.”
+                I was instantly attracted. 4 years later, I’ve gotten a lot closer to God and I’ve made great friends with
+                whom I can have a board games night or pray over a difficult situation."
+              </p>
+              <div class="card-footer">
+                <h2 class="card-title" style="font-size: 20px">Cindy Wakiyama</h2>
+                <h6 class="card-category"></h6>
+                <div class="card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="./assets/img/profilepic3.jpg" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card card-testimonial">
+            <div class="card-icon">
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </div>
+            <div class="card-body">
+              <p class="card-description" style="color:gray;">
+                "Reading the Bible with other students and families around Texas A&M was so wonderful and gave me a sense of community
+                and family. Having such a community in my college years helped me get through school and grow as a person
+                in Christ!"
+              </p>
+              <div class="card-footer">
+                <h2 class="card-title" style="font-size: 20px">Samantha Lett</h2>
+                <h6 class="card-category"></h6>
+                <div class="card-avatar">
+                    <img class="img" src="./assets/img/profilepic4.jpg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <br>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--     *********    CONTACT US     *********      -->
+
+<div class="section" id="ContactUs">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-5 ml-auto mr-auto text-center">
+        <h1 class="title">Contact us!</h1>
+
+        <br />
+        <h3>
+
+
+          "Pursue...
+          <span style="color:maroon; font-weight: bold">with those </span> who call on the Lord out of a pure heart." </h3>
+        <h3>2 Timothy 2:22</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 download-area ml-auto mr-auto">
+        <a style="color:maroon;" class="nav-link" href="https://goo.gl/forms/ywqmzX9bY0kdGnWe2" class="btn btn-warning btn-round" target="_blank">Connect</a>
+      </div>
+    </div>
+  </div>
+</div>

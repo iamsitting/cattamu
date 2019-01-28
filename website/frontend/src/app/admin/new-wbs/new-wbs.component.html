@@ -1,0 +1,28 @@
+<div class="page-header section-gray">
+    <div class="container">
+        <div class="row" style="margin-top: 100px;">
+            <div class="container text-center">
+                <h1 style="color: #500000; font-weight: 700; display: block;">ADD A NEW BIBLE STUDY WEEK</h1>
+            </div>
+            <div class="container" style="margin-top: 0px;">
+                <form class="register-form">
+                    <label style="color: #500000; font-weight: 600;">Date:</label>
+                    <input type="text" class="form-control" name="date" placeholder="Month Day (April 18th)" style="margin-bottom: 7px;" (keyup)="getDate($event)">
+
+                    <label style="color: #500000; font-weight: 600;">Location:</label>
+                    <input type="text" class="form-control" name="date" style="margin-bottom: 7px;" (keyup)="getLocation($event)">
+
+                    <label style="color: #500000; font-weight: 600;">Topic:</label>
+                    <input type="text" name="topic" class="form-control" style="margin-bottom: 7px;" (keyup)="getTopic($event)">
+                    
+                    <label style="color: #500000; font-weight: 600;">Download Link:</label>
+                    <input type="text" name="download" class="form-control" style="margin-bottom: 7px;" (keyup)="getDownload($event)" placeholder="If the outline is not yet available, just leave this field blank">
+                    <h6 style="color: white; font-weight: 300;">* When you enter the link, make sure it is the full link which includes "https/http" in the beginning</h6>
+                    
+                    <button class="btn btn-round form-button" style="background-color: #fbc658; border: 0px;" [routerLink]="['/admin/dashboard']"><span style="color: #500000;">Back</span></button>
+                    <button class="btn btn-round form-button" style="background-color: #fbc658; border: 0px;" (click)="newWbs()"><span style="color: #500000;">Submit</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

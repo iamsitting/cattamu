@@ -1,0 +1,32 @@
+<div class="page-header section-gray">
+    <div class="container">
+        <div class="row" style="margin-top: 100px;">
+            <div class="container text-center">
+                <h1 style="color: #500000; font-weight: 700; display: block;">ENTER A NEW ANNOUNCEMENT</h1>
+            </div>
+            <div class="container" style="margin-top: 0px;">
+                <form class="register-form" style="display: block">
+                    <label style="color: #500000; font-weight: 600;">Title:</label>
+                    <input type="text" class="form-control" name="title" style="margin-bottom: 7px;" (keyup)="getTitle($event)">
+
+                    <label style="color: #500000; font-weight: 600;">Subtitle:</label>
+                    <input type="text" name="subtitle" class="form-control" style="margin-bottom: 7px;"  (keyup)="getSubtitle($event)">
+
+                    <label style="color: #500000; font-weight: 600;">Link:</label>
+                    <input type="text" name="subtitle" class="form-control" style="margin-bottom: 7px;"  (keyup)="getLink($event)">
+                    <h6 style="color: white; font-weight: 300;">* When you enter the link, make sure it is the full link which includes "https/http" in the beginning</h6>
+                    <h6 style="color: white; font-weight: 300;">* Always check if the link is clickable on the home page</h6>
+                    
+                    <label style="color: #500000; font-weight: 600;">Picture Link:</label>
+                    <input type="text" name="subtitle" class="form-control" style="margin-bottom: 7px;"  (keyup)="getPicLink($event)">
+                    <h6><a href="https://photos.app.goo.gl/9DcHu1C7p8J32sfv9" target="blank" style="color: white; font-weight: 300;">* Click here to access the Christians at TAMU photo albums</a></h6>
+                    <h6 style="color: white; font-weight: 300;">* Select a photo, right click, and copy the image address</h6>
+                    <h6 style="color: white; font-weight: 300;">* Always check if the picture shows up on the home page</h6>
+
+                    <button class="btn btn-round form-button" style="background-color: #fbc658; border: 0px;" [routerLink]="['/admin/dashboard']"><span style="color: #500000;">Back</span></button>
+                    <button class="btn btn-round form-button" style="background-color: #fbc658; border: 0px;" (click)="newAnnouncement()"><span style="color: #500000;">Submit</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
