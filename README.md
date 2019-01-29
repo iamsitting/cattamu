@@ -1,6 +1,16 @@
 # About
 This repository holds software (mostly scripts) related to cattamu.
 
+# Website
+The CATAMU website uses a Django backend and AngularJS frontend.
+``` bash
+vim website/frontend/sendgrid.env #add api_key
+vim website/frontend/emailconfig.json #add api_key
+wget http://someurl.com/assets -o website/frontend/src/assets # download assets
+cd website
+./production.sh
+```
+
 # Webscraper
 This is an application that automates the cumbersome process of updating the website's announcement and event schedule. This is used until a full CRUD operation is implemented on the website.
 
@@ -19,7 +29,7 @@ ADMIN_PASSWORD = ''
 # admin login url
 TARGET_LOGIN = ''
 # admin dashboard urls for add new entries
-TARGET_NEW_ANN = '' 
+TARGET_NEW_ANN = ''
 TARGET_NEW_TNM = ''
 TARGET_NEW_WBS = ''
 # DO NOT commit this file!
@@ -28,6 +38,3 @@ TARGET_NEW_WBS = ''
 ## Other Notes
 This application uses selenium and the Chrome webdriver. This means that results may vary from machine to machine.
 This application should be maintained as the website's frontend is modified. Hopefully this application does not remain for too long...
-
-## Website
-The CATAMU website with django backend and angular frontend.
