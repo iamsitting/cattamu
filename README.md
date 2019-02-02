@@ -11,6 +11,17 @@ cd website
 ./production.sh
 ```
 
+## Development Mode
+``` base
+DJANGO_SETTINGS_MODULE=catamu.settings.dev
+cd website/frontend
+npm run dev &
+cd ../backend/catamu
+./manage.py makemigrations
+./manage.py migrate
+./manage.py runserver &
+```
+
 # Webscraper
 This is an application that automates the cumbersome process of updating the website's announcement and event schedule. This is used until a full CRUD operation is implemented on the website.
 

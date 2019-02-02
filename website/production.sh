@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export DJANGO_SETTINGS_MODULE=catamu.settings.prod
 source ../env/bin/activate
 #sudo service gunicorn stop
 git stash

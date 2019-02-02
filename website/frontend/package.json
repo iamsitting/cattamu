@@ -5,6 +5,7 @@
     "ng": "ng",
     "build": "ng build --prod",
     "django": "ng build --prod --output-path ../backend/catamu/static/ --output-hashing none",
+    "dev": "ng build --prod --output-path ../backend/catamu/static/ --watch --output-hashing none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
